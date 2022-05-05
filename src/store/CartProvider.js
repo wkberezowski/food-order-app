@@ -1,10 +1,12 @@
 import { useReducer } from 'react';
+
 import CartContext from './cart-context';
 
 const defaultCartState = {
   items: [],
-  amount: 0,
+  totalAmount: 0,
 };
+
 const cartReducer = (state, action) => {
   if (action.type === 'ADD') {
     const updatedItems = state.items.concat(action.item);
@@ -24,7 +26,7 @@ const CartProvider = (props) => {
     defaultCartState
   );
 
-  const addItemToCartHanlder = (item) => {
+  const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item: item });
   };
 
@@ -35,7 +37,7 @@ const CartProvider = (props) => {
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
-    addItem: addItemToCartHanlder,
+    addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
   };
 
